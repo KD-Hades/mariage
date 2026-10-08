@@ -118,9 +118,8 @@
   </main>
 
 <script>
-  // 1) Après avoir déployé le Google Apps Script fourni dans le dossier,
-  // copiez l'URL /exec ici :
-  const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbxw11Q4qNVBA9jWtKQPok0K9Fu_oz6gyCHz27YV8uD_6yiG9lqUGVe3hEiBfmEYn1HsVw/exec";
+  // Remplacez cette URL par celle du service backend Render.
+  const RSVP_ENDPOINT = "https://VOTRE-BACKEND.onrender.com/api/rsvp";
 
   // 2) Date du mariage (heure locale du lieu)
   const WEDDING_DATE = new Date("2027-01-16T11:00:00-05:00");
@@ -167,7 +166,7 @@
     const form = e.currentTarget;
     const status = document.getElementById("status");
     const button = e.currentTarget.querySelector("button[type=submit]");
-    if(RSVP_ENDPOINT.includes("COLLEZ_ICI")){
+    if(RSVP_ENDPOINT.includes("VOTRE-BACKEND")){
       status.textContent = "Les réponses en ligne ne sont pas encore disponibles. Merci de contacter directement Vanella et Chrysler.";
       return;
     }
@@ -176,22 +175,24 @@
 
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     if(data.attendance === "Absent(e)"){ data.guests = "0"; data.diet = ""; }
-    data.submittedAt = new Date().toISOString();
 
     try{
-      // Apps Script peut nécessiter no-cors selon le déploiement.
-      // Le backend enregistre la réponse dans la feuille.
-      await fetch(RSVP_ENDPOINT, {
+      const response = await fetch(RSVP_ENDPOINT, {
         method:"POST",
-        mode:"no-cors",
-        headers:{"Content-Type":"text/plain;charset=utf-8"},
+        headers:{"Content-Type":"application/json"},
         body:JSON.stringify(data)
       });
+      const result = await response.json().catch(() => null);
+      if(!response.ok){
+        throw new Error(result?.error || "Le serveur n’a pas pu enregistrer votre réponse.");
+      }
       form.reset();
       guestFields.classList.remove("hidden");
       status.textContent = "Merci ♡ Votre réponse a été transmise.";
-    }catch(err){
-      status.textContent = "Impossible d’envoyer la réponse. Réessayez ou contactez les mariés.";
+    }catch(error){
+      status.textContent = error instanceof TypeError
+        ? "Le serveur est inaccessible. Réessayez plus tard ou contactez les mariés."
+        : error.message;
     }finally{
       button.disabled = false;
     }
