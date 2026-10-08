@@ -23,13 +23,14 @@ dans `backend/` et une base PostgreSQL.
 ## Déploiement du backend sur Render
 
 1. Créer une base PostgreSQL dans Render.
-2. Créer un **Web Service** lié au dépôt GitHub, avec `backend` comme **Root Directory**.
-3. Utiliser `npm install` comme commande de construction et `npm start` comme commande de démarrage.
-4. Ajouter les variables d'environnement au service :
-	- `DATABASE_URL` : l'URL interne de la base PostgreSQL Render.
-	- `FRONTEND_ORIGINS` : l'origine exacte du site publié, par exemple `https://VOTRE-UTILISATEUR.github.io` (sans chemin `/mariage`).
-5. Après le déploiement, ouvrir `https://VOTRE-SERVICE.onrender.com/healthz`. Une réponse `{"ok":true}` confirme que l'API et la base répondent.
-6. Dans `index.html`, remplacer `https://VOTRE-BACKEND.onrender.com/api/rsvp` par l'URL réelle `https://VOTRE-SERVICE.onrender.com/api/rsvp`, puis envoyer cette modification sur GitHub.
-7. Envoyer une réponse test et vérifier qu'elle apparaît dans la table `rsvps` de la base PostgreSQL.
+2. Créer un **Web Service** lié au dépôt GitHub, avec `backend` comme **Root Directory**. Régler la commande de construction sur `npm install` et celle de démarrage sur `npm start`.
+3. Avant le premier déploiement, ouvrir la section **Environment** du Web Service et ajouter :
+	- `DATABASE_URL` : coller l'**Internal Database URL** affichée dans la page de la base PostgreSQL créée à l'étape 1. C'est l'adresse qui permet au backend de se connecter à la base.
+	- `FRONTEND_ORIGINS` : mettre l'origine exacte du site publié, par exemple `https://VOTRE-UTILISATEUR.github.io` (sans chemin `/mariage`).
+
+	Sans `DATABASE_URL`, le backend s'arrête au démarrage. Enregistrer les variables, puis lancer ou relancer le déploiement.
+4. Quand le déploiement indique **Live**, copier l'URL du Web Service affichée par Render, par exemple `https://mariage-rsvp-api.onrender.com`, puis ouvrir cette adresse suivie de `/healthz`, par exemple `https://mariage-rsvp-api.onrender.com/healthz`. La réponse `{"ok":true}` confirme que le backend a démarré et peut joindre PostgreSQL.
+5. Dans `index.html`, remplacer `https://VOTRE-BACKEND.onrender.com/api/rsvp` par l'URL du Web Service copiée à l'étape précédente, suivie de `/api/rsvp`. Envoyer ensuite cette modification sur GitHub.
+6. Envoyer une réponse test et vérifier qu'elle apparaît dans la table `rsvps` de la base PostgreSQL.
 
 La table est créée automatiquement au démarrage. L'API n'expose aucune route pour lire les réponses publiquement.
