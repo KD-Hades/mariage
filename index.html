@@ -74,7 +74,9 @@
       <div class="section-inner">
         <h2 class="section-title">Seriez-vous des nôtres ?</h2>
         <p class="section-sub">Votre présence compte beaucoup pour nous. Merci de nous faire part de votre réponse avant le <strong>15 novembre 2026</strong>.</p>
-        <form id="rsvpForm" class="rsvp-box">
+        <form id="rsvpForm" name="rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="rsvp-box">
+          <input type="hidden" name="form-name" value="rsvp">
+          <div hidden><label>Ne remplissez pas ce champ : <input name="bot-field" tabindex="-1" autocomplete="off"></label></div>
           <div class="field">
             <label for="name">Nom et prénom *</label>
             <input id="name" name="name" autocomplete="name" required placeholder="Votre nom" />
@@ -118,9 +120,6 @@
   </main>
 
 <script>
-  // Remplacez cette URL par celle du service backend Render.
-  const RSVP_ENDPOINT = " https://mariage-zock.onrender.com/api/rsvp";
-
   // 2) Date du mariage (heure locale du lieu)
   const WEDDING_DATE = new Date("2027-01-16T11:00:00-05:00");
 
@@ -166,32 +165,30 @@
     const form = e.currentTarget;
     const status = document.getElementById("status");
     const button = e.currentTarget.querySelector("button[type=submit]");
-    if(RSVP_ENDPOINT.includes("VOTRE-BACKEND")){
-      status.textContent = "Les réponses en ligne ne sont pas encore disponibles. Merci de contacter directement Vanella et Chrysler.";
-      return;
-    }
     button.disabled = true;
     status.textContent = "Envoi de votre réponse…";
 
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
-    if(data.attendance === "Absent(e)"){ data.guests = "0"; data.diet = ""; }
+    const formData = new FormData(form);
+    if(formData.get("attendance") === "Absent(e)"){
+      formData.set("guests", "0");
+      formData.set("diet", "");
+    }
 
     try{
-      const response = await fetch(RSVP_ENDPOINT, {
+      const response = await fetch("/", {
         method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(data)
+        headers:{"Content-Type":"application/x-www-form-urlencoded"},
+        body:new URLSearchParams(formData).toString()
       });
-      const result = await response.json().catch(() => null);
       if(!response.ok){
-        throw new Error(result?.error || "Le serveur n’a pas pu enregistrer votre réponse.");
+        throw new Error("Netlify n’a pas accepté la réponse. Réessayez dans quelques instants.");
       }
       form.reset();
       guestFields.classList.remove("hidden");
       status.textContent = "Merci ♡ Votre réponse a été transmise.";
     }catch(error){
       status.textContent = error instanceof TypeError
-        ? "Le serveur est inaccessible. Réessayez plus tard ou contactez les mariés."
+        ? "Impossible de joindre Netlify. Vérifiez votre connexion et réessayez."
         : error.message;
     }finally{
       button.disabled = false;
