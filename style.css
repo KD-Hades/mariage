@@ -123,35 +123,15 @@
     }
     .hidden{display:none!important}
     body{background:#f3e9d9;color:#641b29;font-family:var(--serif);isolation:isolate}
-    /* Un seul décor fixe relie toutes les sections, sans raccord entre elles. */
-    body::before{
-      content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-      background:linear-gradient(90deg,rgba(250,244,231,.12),rgba(250,244,231,.78) 28%,rgba(250,244,231,.78) 72%,rgba(250,244,231,.12)),url('image/fond-floral.png') center/cover no-repeat;
-    }
     .screen{
       min-height:100svh;min-height:100dvh;
-      background-color:#fffaf1;
-      background-image:linear-gradient(rgba(255,250,241,.12),rgba(255,250,241,.12)),url('image/fond-enveloppe-bourgogne-sauge.png');
-      background-position:center;
-      background-size:cover;
-      background-repeat:no-repeat;
+      background:radial-gradient(ellipse at 50% 30%,#812d37,#511419 65%,#380a0e);
       padding:clamp(16px,4vw,40px);
     }
     .section-sub{padding:12px 18px;background:rgba(255,250,241,.88);border-radius:10px}
     .invitation-actions{position:relative;isolation:isolate}
     .invitation-actions::before{content:"";position:absolute;inset:12px max(0px,calc((100% - 680px)/2)) 0;z-index:-1;background:rgba(255,250,241,.88);border-radius:10px}
-    @media(min-aspect-ratio:1/1){
-      /* Deux bordures florales proportionnelles encadrent les écrans larges. */
-      body::before{
-        background-image:linear-gradient(90deg,rgba(250,244,231,.12),rgba(250,244,231,.78) 28%,rgba(250,244,231,.78) 72%,rgba(250,244,231,.12)),url('image/fond-floral.png'),url('image/fond-floral.png');
-        background-size:100% 100%,auto 100%,auto 100%;
-        background-position:center,left center,right center;
-        background-repeat:no-repeat;
-        background-color:#f3e9d9;
-      }
-    }
     @media(max-width:600px) and (orientation:portrait){
-      .screen{background-position:center,42% center}
       .envelope-wrap{width:min(100%,430px)}
     }
     @media(max-height:500px) and (orientation:landscape){

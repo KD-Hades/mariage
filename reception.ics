@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chrysler et Vanella//Invitation mariage//FR
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:reception-20270116-chrysler-vanella@invitation.local
+DTSTAMP:20261013T120000Z
+DTSTART:20270116T230000Z
+SUMMARY:Réception du mariage de Chrysler et Vanella
+LOCATION:301\, rue Lawrence\, Greenfield Park (Longueuil)\, QC J4V 2Z5
+DESCRIPTION:Réception à 18 h 00 (heure du Québec).
+END:VEVENT
+END:VCALENDAR

@@ -1,3 +1,3 @@
 [build]
-  command = "mkdir -p dist && cp index.html style.css dist/ && cp -R image dist/image"
+  command = "mkdir -p dist && cp index.html style.css theme.css interactions.js reception.ics dist/ && cp -R image audio fonts dist/"
   publish = "dist"

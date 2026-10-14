@@ -7,19 +7,26 @@
   <title>Vanella & Chrysler — 16 janvier 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Viaoda+Libre&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
 </head>
 <body>
+  <audio id="weddingMusic" loop preload="none"></audio>
+  <button id="musicToggle" class="music-toggle" type="button" aria-controls="weddingMusic" aria-pressed="false" hidden><svg class="music-note" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M15 3v12.5a3.5 3.5 0 1 1-2-3.16V5l7-2v4l-5 1.4V3Z"/></svg><span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="musicLabel" class="sr-only">Activer la musique</span></button>
+  <span id="musicStatus" class="sr-only" role="status"></span>
   <main id="intro" class="screen" aria-label="Ouvrir l'invitation">
+    <video class="intro-background" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <source src="image/Luminous_Luxury.mp4" type="video/mp4">
+    </video>
     <div class="petal p1"></div><div class="petal p2"></div>
     <div class="envelope-wrap">
-      <div class="eyebrow">Vous êtes invité·e</div>
-      <h1 class="intro-names names-with-rings" aria-label="Vanella et Chrysler"><span>Vanella</span><img class="wedding-rings" src="image/alliances.png" alt="" width="2000" height="2000"><span>Chrysler</span></h1>
+      <h1 class="intro-names" aria-label="Chrysler et Vanella"><span>Chrysler</span><img class="wedding-rings" src="image/alliances.png" alt="" width="2000" height="2000"><span>Vanella</span></h1>
+      <div class="eyebrow">Vous êtes cordialement invités</div>
       <div id="envelope" class="envelope" role="button" tabindex="0" aria-label="Ouvrir l'enveloppe">
         <div class="env-body"></div>
         <div class="flap"></div>
-        <div class="seal">V&C</div>
+        <img class="seal" src="image/Cachet.png" alt="" width="512" height="512">
       </div>
       <div class="tap">Touchez le cachet pour ouvrir</div>
     </div>
@@ -28,48 +35,92 @@
   <main id="invitation" class="hero" aria-hidden="true">
     <section class="hero-inner">
       <h2 class="invitation-heading">Invitation</h2>
-      <p class="invitation-subtitle">Au mariage de</p>
+      <p class="invitation-kicker">AU MARIAGE DE</p>
       <div class="petal p1"></div><div class="petal p2"></div>
-      <div class="card">
-        <img class="invitation-art" src="image/portrait-coeur-maries.png" width="1024" height="1024" alt="Vanella et Chrysler réunis dans un cœur encadré de roses bourgogne, de roses crème et de feuillage vert sauge." fetchpriority="high">
+      <div class="presentation-art">
+        <img src="image/presentation-bourgogne.png" alt="Chrysler et Vanella dans un cœur fleuri, présenté dans une enveloppe bourgogne" fetchpriority="high">
+        <span class="presentation-sparkle sparkle-one" aria-hidden="true"></span>
+        <span class="presentation-sparkle sparkle-two" aria-hidden="true"></span>
+        <span class="presentation-sparkle sparkle-three" aria-hidden="true"></span>
+        <span class="presentation-sparkle sparkle-four" aria-hidden="true"></span>
+        <span class="presentation-sparkle sparkle-five" aria-hidden="true"></span>
+        <span class="presentation-sparkle sparkle-six" aria-hidden="true"></span>
+        <span class="presentation-sparkle sparkle-seven" aria-hidden="true"></span>
+        <span class="presentation-sparkle sparkle-eight" aria-hidden="true"></span>
+        <span class="presentation-sparkle sparkle-nine" aria-hidden="true"></span>
+        <span class="presentation-sparkle sparkle-ten" aria-hidden="true"></span>
       </div>
-      <div class="love-note">
-        <h1 class="names-with-rings" aria-label="Vanella et Chrysler"><span>Vanella</span><img class="wedding-rings" src="image/alliances.png" alt="" width="2000" height="2000"><span>Chrysler</span></h1>
+      <div class="hero-names" aria-label="Chrysler et Vanella"><span class="hero-name">Chrysler</span><span class="hero-amp" aria-hidden="true">&amp;</span><span class="hero-name">Vanella</span></div>
+      <div class="love-note ceremony-card"><p class="tiny">Une  promesse, une vie à deux</p>
+        <img class="ceremony-flower" src="image/fleur2-transparent.png" alt="" aria-hidden="true" loading="lazy">
+        <img class="ceremony-flower ceremony-flower-left" src="image/fleur2-transparent.png" alt="" aria-hidden="true" loading="lazy">
         <p>Nos chemins se sont croisés, et nos cœurs ont trouvé leur maison.<br>
           Depuis, l’amour se tisse dans nos regards, nos rires et nos rêves partagés.<br>
           Aujourd’hui, nous choisissons de marcher ensemble,<br>
           main dans la main, vers tous les lendemains.</p>
-        <p class="love-signature">Une promesse d’amour, une vie à deux.</p>
+        <h1 class="names-with-rings" aria-label="Chrysler et Vanella"><span class="ceremony-person"><span>Chrysler</span><small>Marié</small></span><img class="wedding-rings" src="image/alliances.png" alt="" width="2000" height="2000"><span class="ceremony-person"><span>Vanella</span><small>Mariée</small></span></h1>
+        <div class="ceremony-information">
+          <svg class="scene ceremony-icon" viewBox="0 0 140 110" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="draw" d="M30 98V49a40 40 0 0 1 80 0v49M40 98V49a30 30 0 0 1 60 0v49"/><path class="sage sway" d="M21 96V40m0 22Q4 52 11 42q12 3 10 20m0 17q18-14 12-25-14 3-12 25M119 96V40m0 22q17-10 10-20-12 3-10 20m0 17q-18-14-12-25 14 3 12 25"/><circle class="gold glow" cx="63" cy="76" r="12"/><circle class="gold glow" cx="78" cy="76" r="12"/><path class="gold" d="M17 100h106"/></svg>
+          <h2>Cérémonie de mariage au palais de justice de Longueuil</h2>
+          <p class="ceremony-time">À 11 h 00</p>
+          <div class="ceremony-date" aria-label="Samedi 16 janvier 2027"><span>Samedi</span><strong>16</strong><span>Janvier<small>2027</small></span></div>
+          <p class="ceremony-location">Lieu : 111, boulevard Jacques-Cartier Est<br>Longueuil (Québec) J4M 2J6</p>
+        </div>
       </div>
       <div class="invitation-actions">
         <div id="countdown" class="countdown" aria-label="Compte à rebours"></div>
-        <a class="cta" href="#rsvp">Répondre à l'invitation ↓</a>
+        <a class="cta rsvp-link" href="#rsvp">Répondre à l'invitation</a>
+        <svg class="rsvp-chevron" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </div>
     </section>
 
+    <section class="content gallery-section"><div class="section-inner"><h2 class="section-title">Galerie photos</h2><p class="section-sub">Quelques souvenirs, avant d’en écrire de nouveaux avec vous.</p><div class="gallery"><img src="image/galerie/web/tof1.jpg" alt="Souvenir de Chrysler et Vanella — photo 1" loading="lazy" width="1600" height="1200"><img src="image/galerie/web/tof2.jpg" alt="Souvenir de Chrysler et Vanella — photo 2" loading="lazy" width="1200" height="1600"><img src="image/galerie/web/tof3.jpg" alt="Souvenir de Chrysler et Vanella — photo 3" loading="lazy" width="1200" height="1600"><img src="image/galerie/web/tof4.jpg" alt="Souvenir de Chrysler et Vanella — photo 4" loading="lazy" width="1600" height="1200"><img src="image/galerie/web/tof5.jpg" alt="Souvenir de Chrysler et Vanella — photo 5" loading="lazy" width="1200" height="1600"><img src="image/galerie/web/tof6.jpg" alt="Souvenir de Chrysler et Vanella — photo 6" loading="lazy" width="1600" height="1200"><img src="image/galerie/web/tof7.jpg" alt="Souvenir de Chrysler et Vanella — photo 7" loading="lazy" width="1200" height="1600"><img src="image/galerie/web/tof8.jpg" alt="Souvenir de Chrysler et Vanella — photo 8" loading="lazy" width="1200" height="1600"><img src="image/galerie/web/tof9.jpg" alt="Souvenir de Chrysler et Vanella — photo 9" loading="lazy" width="960" height="1280"><img src="image/galerie/web/tof10.jpg" alt="Souvenir de Chrysler et Vanella — photo 10" loading="lazy" width="1513" height="1513"><img src="image/galerie/web/tof11.jpg" alt="Souvenir de Chrysler et Vanella — photo 11" loading="lazy" width="1122" height="1402"><img src="image/galerie/web/tof12.jpg" alt="Souvenir de Chrysler et Vanella — photo 12" loading="lazy" width="1024" height="1536"><img src="image/galerie/web/tof13.jpg" alt="Souvenir de Chrysler et Vanella — photo 13" loading="lazy" width="761" height="1280"></div></div></section>
     <section class="content">
       <div class="section-inner">
-        <h2 class="section-title">Le grand jour</h2>
         <p class="section-sub">Nous sommes heureux de vous accueillir pour célébrer cette belle journée avec nous.</p>
         <div class="details">
-          <article class="detail">
-            <svg class="scene" viewBox="0 0 140 110" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="draw" d="M30 98V49a40 40 0 0 1 80 0v49M40 98V49a30 30 0 0 1 60 0v49"/><path class="sage sway" d="M21 96V40m0 22Q4 52 11 42q12 3 10 20m0 17q18-14 12-25-14 3-12 25M119 96V40m0 22q17-10 10-20-12 3-10 20m0 17q-18-14-12-25 14 3 12 25"/><circle class="gold glow" cx="63" cy="76" r="12"/><circle class="gold glow" cx="78" cy="76" r="12"/><path class="gold" d="M17 100h106"/></svg>
-            <h3>Cérémonie</h3><p><strong>Date :</strong> Samedi 16 janvier 2027<br><strong>Heure :</strong> 11 h 00<br><strong>Lieu :</strong> 111, boulevard Jacques-Cartier Est<br>Longueuil (Québec) J4M 2J6</p>
-          </article>
-          <article class="detail">
+          <article class="detail reception-card">
+            <img class="reception-flower" src="image/fleur2-transparent.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="reception-flower reception-flower-left" src="image/fleur2-transparent.png" alt="" aria-hidden="true" loading="lazy">
             <svg class="scene" viewBox="0 0 140 110" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g class="sway"><path d="M35 19h24v26a12 12 0 0 1-24 0ZM47 57v28m-11 1h22"/><path class="gold" d="M36 35h22"/></g><g class="sway sway-delayed"><path d="M81 19h24v26a12 12 0 0 1-24 0ZM93 57v28M82 86h22"/><path class="gold" d="M82 35h22"/></g><path class="gold glow" d="M70 8v8m-5-4h10M66 44h8m-4-4v8M23 64v8m-4-4h8M118 63v8m-4-4h8"/><path class="sage" d="M25 98h90"/></svg>
-            <h3>Réception</h3><p><strong>Lieu :</strong> 301, rue Lawrence<br>Greenfield Park (Longueuil), QC J4V 2Z5</p>
+            <h3>RÉCEPTION</h3>
+            <div class="reception-when"><span>18:00</span><span>SAMEDI</span></div>
+            <div class="reception-date" aria-label="16 janvier 2027"><strong>16</strong><span>JANVIER<small>2027</small></span></div>
+            <p class="reception-countdown-label">Compte à rebours</p>
+            <p id="receptionCountdown" class="reception-countdown"></p>
+            <div class="reception-calendar">
+              <table aria-label="Calendrier de janvier 2027, réception le samedi 16">
+                <caption>Janvier 2027</caption>
+                <thead><tr><th scope="col">Lu</th><th scope="col">Ma</th><th scope="col">Me</th><th scope="col">Je</th><th scope="col">Ve</th><th scope="col">Sa</th><th scope="col">Di</th></tr></thead>
+                <tbody>
+                  <tr><td></td><td></td><td></td><td></td><td>1</td><td>2</td><td>3</td></tr>
+                  <tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+                  <tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td><span class="calendar-heart" aria-label="16 janvier, jour de la réception"><span>16</span></span></td><td>17</td></tr>
+                  <tr><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr>
+                  <tr><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <a class="calendar-link" href="reception.ics" download="reception-chrysler-vanella.ics">Ajouter au calendrier</a>
+          </article>
+          <article class="reception-location" aria-labelledby="receptionLocationTitle">
+            <h3 id="receptionLocationTitle">Lieu de la réception</h3>
+            <p>301, rue Lawrence<br>Greenfield Park (Longueuil), QC J4V 2Z5</p>
+            <iframe title="Google Maps : lieu de la réception, 301 rue Lawrence à Greenfield Park" src="https://www.google.com/maps/embed?origin=mfe&amp;pb=!1m2!2m1!1s301%20rue%20Lawrence%2C%20Greenfield%20Park%2C%20QC%20J4V%202Z5%2C%20Canada!3m1!1sfr!5m1!1sfr" loading="eager" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            <a class="directions-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=301%20rue%20Lawrence%2C%20Greenfield%20Park%2C%20QC%20J4V%202Z5%2C%20Canada" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m21 3-7 18-3-8-8-3 18-7Z"/></svg>Itinéraire</a>
           </article>
           <article class="detail">
             <svg class="scene" viewBox="0 0 140 110" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g class="sway"><path d="M32 21l-16 9 7 23 9-5v43h31V48l9 5 7-23-16-9-15 12ZM32 21l16 12-8 13-8-25m31 0L48 33l8 13 7-25"/><path class="gold" d="M48 42v37"/></g><g class="sway sway-delayed"><path class="sage" d="M94 22h15l-3 24 18 46H79l18-46ZM97 46h9"/><path class="gold glow" d="M95 51h13"/></g></svg>
             <h3>Code vestimentaire</h3><p>Nous sortirons nos plus belles tenues pour faire briller cette soirée.</p>
             <p class="theme-description"><strong>Thème :</strong> <span class="theme-burgundy">Bourgogne</span> et <span class="theme-sage">vert sauge</span></p>
+            <div class="swatches" aria-label="Bourgogne et vert sauge"><span></span><span></span></div>
           </article>
           
         </div>
       </div>
     </section>
 
+    
     <section id="rsvp" class="content">
       <div class="section-inner">
         <h2 class="section-title">Seriez-vous des nôtres ?</h2>
@@ -116,42 +167,82 @@
     </section>
 
     <div class="footer"><span>Avec amour</span>
-      <span class="couple-names" aria-label="Vanella et Chrysler">Vanella <img class="wedding-rings" src="image/alliances.png" alt="" width="2000" height="2000"> Chrysler</span></div>
+      <p class="gift-note">Votre présence serait le plus beau des cadeaux !</p><span class="couple-names" aria-label="Vanella et Chrysler">Vanella <img class="wedding-rings" src="image/alliances.png" alt="" width="2000" height="2000"> Chrysler</span></div>
   </main>
 
 <script>
+  // MUSIQUE : ajoutez votre fichier dans audio/, puis renseignez son chemin ici.
+  // Exemple : const MUSIC_SOURCE = "audio/notre-chanson.mp3";
+  // Une URL directe vers un fichier audio fonctionne également.
+  const MUSIC_SOURCE = "audio/Marry%20You%20Bruno%20Mars.mp3";
+  const MUSIC_VOLUME = 0.35; // Volume de 0 (silence) à 1 (maximum).
+  const music = document.getElementById("weddingMusic");
+  const musicToggle = document.getElementById("musicToggle");
+  const musicStatus = document.getElementById("musicStatus");
+  if(MUSIC_SOURCE.trim()){
+    music.src = MUSIC_SOURCE.trim();
+    music.volume = Math.min(1, Math.max(0, MUSIC_VOLUME));
+  }
+  function updateMusicButton(){
+    const playing = !music.paused && !music.muted;
+    document.getElementById("musicLabel").textContent = playing ? "Couper la musique" : "Activer la musique";
+    musicToggle.setAttribute("aria-pressed", String(playing));
+    musicToggle.title = playing ? "Mettre la musique en sourdine" : "Activer la musique";
+  }
+  async function playMusic(){
+    if(!MUSIC_SOURCE.trim()) return;
+    musicStatus.textContent = "";
+    try{
+      await music.play();
+    }catch(error){
+      musicStatus.textContent = error.name === "NotAllowedError"
+        ? "Touchez le bouton pour activer la musique."
+        : "La musique est indisponible. Réessayez plus tard.";
+    }
+    updateMusicButton();
+  }
+  music.addEventListener("play", updateMusicButton);
+  music.addEventListener("pause", updateMusicButton);
+  music.addEventListener("volumechange", updateMusicButton);
+  music.addEventListener("error", () => {
+    music.pause();
+    musicStatus.textContent = "La musique est indisponible. Réessayez plus tard.";
+    updateMusicButton();
+  });
+  musicToggle.addEventListener("click", () => {
+    if(music.paused){ music.muted = false; playMusic(); }
+    else music.muted = !music.muted;
+  });
+
   // 2) Date du mariage (heure locale du lieu)
-  const WEDDING_DATE = new Date("2027-01-16T11:00:00-05:00");
+
 
   const intro = document.getElementById("intro");
   const invitation = document.getElementById("invitation");
   const envelope = document.getElementById("envelope");
 
   function openInvite(){
+    if(envelope.classList.contains("open")) return;
     envelope.classList.add("open");
+    if(MUSIC_SOURCE.trim()){
+      musicToggle.hidden = false;
+      // Lecture pendant le clic : les navigateurs exigent une interaction.
+      playMusic();
+    }
     setTimeout(() => {
       intro.classList.add("hidden");
       invitation.classList.add("visible");
       invitation.setAttribute("aria-hidden","false");
+      invitation.setAttribute("tabindex", "-1");
+      invitation.focus({preventScroll:true});
       window.scrollTo({top:0,behavior:"instant"});
+      if(window.startInvitationScroll) window.startInvitationScroll();
     }, 850);
   }
   envelope.addEventListener("click", openInvite);
   envelope.addEventListener("keydown", e => { if(e.key==="Enter" || e.key===" "){ e.preventDefault(); openInvite(); } });
 
-  const countdown = document.getElementById("countdown");
-  function updateCountdown(){
-    const diff = WEDDING_DATE - new Date();
-    if(diff <= 0){ countdown.innerHTML = '<div class="count"><strong>♡</strong><span>AUJOURD’HUI</span></div>'; return; }
-    const d = Math.floor(diff/86400000);
-    const h = Math.floor(diff%86400000/3600000);
-    const m = Math.floor(diff%3600000/60000);
-    countdown.innerHTML = `
-      <div class="count"><strong>${d}</strong><span>JOURS</span></div>
-      <div class="count"><strong>${h}</strong><span>HEURES</span></div>
-      <div class="count"><strong>${m}</strong><span>MINUTES</span></div>`;
-  }
-  updateCountdown(); setInterval(updateCountdown, 60000);
+  // Les deux décomptes sont synchronisés dans interactions.js.
 
   const yes = document.getElementById("yes");
   const no = document.getElementById("no");
@@ -195,5 +286,6 @@
     }
   });
 </script>
+<script src="interactions.js"></script>
 </body>
 </html>
